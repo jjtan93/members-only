@@ -10,8 +10,15 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
   
+  # Encrypts the given string
   def User.encrypt(string)
     Digest::SHA1.hexdigest(string.to_s)
+  end
+  
+  # Remembers a user in the database for use in persistent sessions.
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.encrypt(remember_token))
   end
   
   private
