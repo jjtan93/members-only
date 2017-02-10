@@ -2,9 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   # Logs in the given user
-  def log_in(user)
-    params[session][user_id] = user.id
-  end
+  #def log_in(user)
+  #  params[session][user_id] = user.id
+  #end
   
   # Logs in and remembers the given user in a persistent session.
   def remember_user(user)
