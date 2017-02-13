@@ -6,7 +6,8 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email])
     if(user && user.authenticate(params[:session][:password]))
       remember_user(user)
-      set_current_user(user)
+      #set_current_user(user)
+      # TODO redirect <<<<<<<<<<<<<<<<<<<<<<<<<<<
     else
       render 'new'
     end

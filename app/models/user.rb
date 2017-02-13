@@ -4,6 +4,7 @@ class User < ApplicationRecord
   before_create :create_remember_digest
   
   has_secure_password
+  #has_many :posts
   
   # Returns a random token.
   def User.new_token

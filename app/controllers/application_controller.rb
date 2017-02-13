@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # Logs in and remembers the given user in a persistent session.
   def remember_user(user)
     user.remember
-    #cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
   end
   
@@ -25,6 +25,12 @@ class ApplicationController < ActionController::Base
   
   def sign_out
     @current_user = nil
+    cookies.permanent.delete :user.id
     cookies.permanent.delete :remember_token
+  end
+  
+  def logged_in?
+    return false if(get_current_user == nil)
+    return true
   end
 end
