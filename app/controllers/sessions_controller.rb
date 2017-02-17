@@ -6,14 +6,15 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email])
     if(user && user.authenticate(params[:session][:password]))
       remember_user(user)
-      #set_current_user(user)
-      # TODO redirect <<<<<<<<<<<<<<<<<<<<<<<<<<<
+      flash[:success] = "You have logged in!"
+      redirect_to posts_url
     else
       render 'new'
     end
   end
   
-  def delete
+  def destroy
     sign_out
+    redirect_to posts_url
   end
 end

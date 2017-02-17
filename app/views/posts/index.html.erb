@@ -1,0 +1,28 @@
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value %>
+<% end %>
+
+<% if logged_in? %>
+	Currently logged in as : <%= get_current_user.username %><br><br>
+	<%= link_to "Create Post", new_post_url, method: :get %>
+	<%= link_to "Logout", logout_url, method: :delete %>
+<% else %>
+	<%= link_to "Login", login_url, method: :get %>
+<% end %>
+
+<ul>
+  <% @posts.each do |post| %>
+  	<li>
+		Title: <br>
+		<%= post.title %> <br><br>
+		Body: <br>
+		<%= post.body %> <br><br>
+		Posted by: <br>
+		<% if logged_in? %>
+			<%= post.username %> <br><br>
+		<% else %>
+			??? <br><br>
+		<% end %>
+	</li>
+  <% end %>
+</ul>
